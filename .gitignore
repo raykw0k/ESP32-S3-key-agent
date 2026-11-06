@@ -1,0 +1,11 @@
+/build/
+/managed_components/
+/sdkconfig
+/sdkconfig.old
+/.vscode/
+.DS_Store
+__pycache__/
+/tests/test_sequence
+/tests/*.dSYM/
+/dist/
+*.log
