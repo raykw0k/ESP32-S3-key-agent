@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#122b38"><title>key-agent Keyboard Console</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#173341;background:#f1f5f5;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,select{cursor:pointer}button{border:1px solid #d6e0e3;border-radius:12px;padding:11px 16px;background:#fff;color:inherit;font-weight:650;touch-action:manipulation}button:disabled{opacity:.4;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #51c6ac;outline-offset:2px}input,select{min-height:44px;border:1px solid #cbd8dc;border-radius:10px;padding:9px 11px;background:#fff;color:#173341;max-width:100%}input[type=number]{width:100%}header{background:#122b38;color:#f4faf9;padding:32px 22px 28px}header>div,main{max-width:820px;margin:auto}.eyebrow{font-size:11px;letter-spacing:3px;color:#93c8ba;font-weight:750}h1{font-size:29px;letter-spacing:-1px;margin:9px 0}header p{color:#b5c8cf;margin:0;font-size:14px;line-height:1.7}main{padding:20px 16px 110px}.panel{background:#fff;border:1px solid #dce5e7;border-radius:20px;padding:20px;margin-bottom:18px;box-shadow:0 4px 15px #17334105}.status-line,.section-head,.toolbar,.row-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;gap:7px;border-radius:24px;padding:6px 10px;background:#eff3f5;font-size:12px;font-weight:650}.badge.good{color:#17634d;background:#dff4eb}.dot{height:7px;width:7px;background:currentColor;border-radius:50%}.status-title{font-size:22px;margin:16px 0 6px}.muted{color:#657b85;font-size:13px;line-height:1.65}.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.primary{color:#fff;background:#17664f;border-color:#17664f}.danger{color:#ae3939;border-color:#e9cccc;background:#fff8f8}.controls button{font-size:16px;padding:14px}h2{font-size:18px;margin:0}.section-head{margin-bottom:16px}.section-head small{font-size:12px;color:#647e88}.loop-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}label.field{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:650}label.field>select{width:100%}.action{background:#f8fafb;border:1px solid #dce5e7;border-radius:15px;padding:15px;margin-top:12px}.row-head{margin-bottom:14px}.row-title{display:flex;gap:8px;align-items:center;font-weight:700;font-size:14px}.number{border-radius:8px;background:#e2edec;color:#286755;min-width:27px;text-align:center;padding:5px}.row-tools{display:flex;gap:6px}.row-tools button{padding:6px 9px;border-radius:8px;min-width:36px;min-height:36px;font-size:14px}.row-tools .remove{color:#a44747}.fields{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px}.mods{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.mod{display:flex;align-items:center;gap:5px;font-size:12px;border:1px solid #d1dedf;background:white;border-radius:8px;padding:7px 9px;cursor:pointer}.mod:has(input:checked){background:#e1f2eb;border-color:#6caf97}.mod input{min-height:0;margin:0;accent-color:#17664f}.toolbar{margin-top:16px}.toolbar>div{display:flex;gap:8px;flex-wrap:wrap}.link{background:none;border:none;padding:9px 2px;color:#647f8a;font-size:12px}.hint{margin:15px 0 0}.savebar{position:fixed;bottom:0;left:0;right:0;z-index:5;background:#fffffff5;border-top:1px solid #dce5e7;padding:12px 16px calc(12px + env(safe-area-inset-bottom));backdrop-filter:blur(12px)}.save-inner{max-width:788px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}.save-inner button{min-width:145px}.save-text strong{font-size:13px;display:block}.save-text span{font-size:11px;color:#6a7d85}#toast{position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:#173341;color:white;padding:12px 18px;border-radius:12px;z-index:10;max-width:90vw;width:max-content;font-size:14px;box-shadow:0 4px 30px #0002;line-height:1.5}#toast.error{background:#943838}[hidden]{display:none!important}details{font-size:13px;line-height:1.8;color:#657b85}summary{cursor:pointer;font-weight:650;color:#38545e}details p{margin:9px 0 0}footer{text-align:center;color:#8a9ba2;font-size:11px;margin-top:18px}@media(max-width:520px){header{padding-top:25px}h1{font-size:26px}.panel{padding:16px}.fields{grid-template-columns:1fr 1fr}.fields .key-field{grid-column:1/-1}.row-tools{gap:4px}.row-tools button{min-width:34px;padding:5px 8px}.action{padding:12px}.toolbar{align-items:flex-start}.save-inner button{min-width:136px}main{padding:15px 12px 110px}.loop-row{grid-template-columns:1.2fr 1fr}}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:16px}.tabs button{padding:12px 4px}.tabs button.active{background:#17664f;color:white}.tabs small{display:block;font-size:10px;margin-top:4px}</style></head>
+<body><header><div><div class="eyebrow">ESP32 · USB KEYBOARD</div><h1>Your keys. Your timing.</h1><p>Build key sequences and control your USB keyboard from your phone.</p></div></header>
+<main><nav class="tabs" id="tabs" aria-label="Select a sequence"></nav><p class="muted">Four independent timers. Key presses are queued by priority: Sequence 1 > 2 > 3 > 4.</p>
+<section class="panel"><div class="status-line"><span class="badge" id="linkState"><i class="dot"></i><span>Connecting to device</span></span><span class="badge" id="usbState">Checking USB</span></div><h2 class="status-title" id="runState">Loading status...</h2><div class="muted" id="progress">Connect to the hotspot to configure your keyboard.</div><div class="controls"><button class="primary" id="start" disabled>▶ Start sequence</button><button class="danger" id="stop">■ Stop sequence</button></div><div class="controls"><button class="primary" id="startAll" disabled>▶ Start all</button><button class="danger" id="stopAll">■ Stop all</button></div></section>
+<section class="panel"><div class="section-head"><h2 id="logicTitle">Sequence 1 · Actions</h2><small id="count">0 / 32 actions</small></div><div class="loop-row"><label class="field">Repeat mode<select id="loopMode"><option value="forever">Repeat forever</option><option value="count">Repeat count</option></select></label><label class="field" id="loopCountField" hidden>Repeat count<input id="loops" type="number" inputmode="numeric" min="1" max="100000" step="1" value="1"></label></div>
+<label class="mod" style="margin-top:16px"><input type="checkbox" id="enabled">Enable this sequence</label><p class="muted">Enable and save to include this sequence in BOOT and Start all. Uncheck and save to disable it while keeping its actions.</p><div id="actions"></div><div class="toolbar"><div><button id="addKey">＋ Key</button><button id="addWait">＋ Wait</button></div><button class="link" id="reset">Load default 1 → 2 → 3</button></div><p class="muted hint">Actions run from top to bottom. Each key is released before waiting. 1 second = 1000 ms; 1 hour = 3600000 ms. Maximum wait: 24 hours.</p></section>
+<section class="panel"><details><summary>Connection and usage tips</summary><p>Connect the left USB/OTG port to your computer. Connect your phone to the <strong>key-agent</strong> hotspot, then open <strong>http://192.168.4.1</strong>. If your phone reports no internet access, choose to stay connected.</p><p>Press BOOT to stop all running sequences, or start all enabled sequences when paused. Power-on, USB reconnection, and host sleep leave all sequences paused. Closing this page or disconnecting your phone does not stop a running sequence.</p><p>Saving stops only the selected sequence and releases its key; other sequences continue. Restarting begins at the first action. Editing does not send keys. Labels use the US keyboard layout; output depends on your computer keyboard layout and input method. Use Cmd/Win for Mac Command.</p></details></section><footer>Local control · Settings stored on device · No internet required</footer>
+</main><div class="savebar"><div class="save-inner"><div class="save-text"><strong id="saveState">Loading configuration</strong><span>Saves only the selected sequence</span></div><button class="primary" id="save" disabled>Save and apply</button></div></div><div id="toast" role="status" aria-live="polite" hidden></div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+let config={loops:0,actions:[]},loaded=false,dirty=false,busy=false,online=false,lastStatus=null,toastTimer;
+let selected=0,drafts=[],dirtyFlags=[false,false,false,false];
+const current=()=>lastStatus?.logics?.[selected];
+const groups=[['Numbers',Array.from({length:9},(_,i)=>[30+i,String(i+1)]).concat([[39,'0']])],['Letters',Array.from({length:26},(_,i)=>[4+i,String.fromCharCode(65+i)])],['Common keys',[[40,'Enter'],[41,'Esc'],[42,'Backspace'],[43,'Tab'],[44,'Space'],[57,'Caps Lock'],[73,'Insert'],[74,'Home'],[75,'Page Up'],[76,'Delete'],[77,'End'],[78,'Page Down'],[79,'→ Right'],[80,'← Left'],[81,'↓ Down'],[82,'↑ Up']]],['Function keys',Array.from({length:12},(_,i)=>[58+i,'F'+(i+1)]).concat(Array.from({length:12},(_,i)=>[104+i,'F'+(i+13)]))],['Symbols',[[45,'-'],[46,'='],[47,'['],[48,']'],[49,'\\'],[51,';'],[52,"'"],[53,'`'],[54,','],[55,'.'],[56,'/']]]];
+function toast(message,error=false){const t=$('toast');t.textContent=message;t.classList.toggle('error',error);t.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.hidden=true,4500)}
+async function api(path,body){const c=new AbortController(),timer=setTimeout(()=>c.abort(),6000);try{const r=await fetch(path,{cache:'no-store',signal:c.signal,...(body===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json','X-Keyboard-Request':'1'},body:JSON.stringify(body)})});const data=await r.json();if(!r.ok)throw Error(data.error||'Device request failed');return data}finally{clearTimeout(timer)}}
+function changed(){dirty=true;dirtyFlags[selected]=true;updateButtons()}
+function updateButtons(){
+ $('saveState').textContent=!loaded?'Configuration not loaded':busy?'Saving...':dirty?'Unsaved changes':dirtyFlags.some(Boolean)?'Other sequences have unsaved changes':'Saved to device';
+ $('save').disabled=!loaded||!online||busy||!dirty;
+ $('start').disabled=!loaded||!online||busy||dirty||!lastStatus?.usb||current()?.running||!config.enabled;
+ $('startAll').disabled=!loaded||!online||busy||dirtyFlags.some(Boolean)||!lastStatus?.usb||!lastStatus?.logics?.some(l=>l.enabled&&!l.running);
+ $('start').textContent=current()?.running?'Running':'▶ Start sequence';
+ renderTabs();
+ for(const id of ['addKey','addWait','loopMode','loops','reset','enabled'])$(id).disabled=!loaded||busy;
+ $('addKey').disabled ||= config.actions.length>=32;
+ $('addWait').disabled ||= config.actions.length>=32;
+ for(const el of $('actions').querySelectorAll('input,select,button'))el.disabled=busy||el.dataset.bound==='true';
+}
+function field(label,element,cls=''){const l=document.createElement('label');l.className='field '+cls;const s=document.createElement('span');s.textContent=label;l.append(s,element);return l}
+function number(value,min,max,onChange){const input=document.createElement('input');Object.assign(input,{type:'number',min:String(min),max:String(max),step:'1',value:String(value),inputMode:'numeric'});input.addEventListener('input',()=>{onChange(input.value===''?NaN:Number(input.value));changed()});return input}
+function renderTabs(){
+ $('tabs').replaceChildren();
+ for(let i=0;i<4;i++){
+  const b=document.createElement('button');b.className=i===selected?'active':'';b.disabled=!loaded||busy;
+  b.setAttribute('aria-pressed',String(i===selected));
+  b.append(document.createTextNode('Sequence '+(i+1)+(dirtyFlags[i]?' *':'')));
+  const note=document.createElement('small');note.textContent=lastStatus?.logics?.[i]?.running?'Running':lastStatus?.logics?.[i]?.enabled===false?'Disabled':'Paused';b.append(note);
+  b.onclick=()=>{drafts[selected]=config;dirtyFlags[selected]=dirty;selected=i;config=drafts[i];dirty=dirtyFlags[i];render();showStatus()};$('tabs').append(b);
+ }
+}
+function showStatus(){
+ const s=current();if(!s)return;
+ $('runState').textContent=lastStatus.updating?'Saving configuration':'Sequence '+(selected+1)+(s.running?' · Running':' · Paused');
+ $('progress').textContent=s.running?'Action '+s.step+' · Completed '+s.completed+' cycles'+(s.loops?' / '+s.loops:' · Repeat forever'):lastStatus.usb?'Completed '+s.completed+' cycles':'Connect the left USB/OTG port and wake your computer before starting.';
+}
+function render(){
+ $('enabled').checked=!!config.enabled;
+ $('logicTitle').textContent='Sequence '+(selected+1)+' · Actions';
+ $('actions').replaceChildren();$('count').textContent=config.actions.length+' / 32 actions';
+ $('loopMode').value=config.loops===0?'forever':'count';$('loopCountField').hidden=config.loops===0;
+ if(config.loops!==0)$('loops').value=config.loops;
+ config.actions.forEach((a,index)=>{
+  const card=document.createElement('article');card.className='action';
+  const head=document.createElement('div');head.className='row-head';
+  const title=document.createElement('div');title.className='row-title';const num=document.createElement('span');num.className='number';num.textContent=String(index+1).padStart(2,'0');title.append(num,document.createTextNode(a.type==='key'?'Key':'Wait'));
+  const tools=document.createElement('div');tools.className='row-tools';
+  for(const [text,label,disabled,fn] of [
+    ['↑','Move action up',index===0,()=>{[config.actions[index-1],config.actions[index]]=[a,config.actions[index-1]]}],
+    ['↓','Move action down',index===config.actions.length-1,()=>{[config.actions[index+1],config.actions[index]]=[a,config.actions[index+1]]}],
+    ['×','Delete action',config.actions.length===1,()=>config.actions.splice(index,1)]]){
+     const b=document.createElement('button');b.textContent=text;b.setAttribute('aria-label',label+' '+(index+1));b.title=label;b.dataset.bound=String(disabled);if(text==='×')b.className='remove';b.onclick=()=>{fn();changed();render()};tools.append(b)
+  }
+  head.append(title,tools);card.append(head);const fields=document.createElement('div');fields.className='fields';
+  if(a.type==='key'){
+   const select=document.createElement('select');
+   for(const [label,keys] of groups){const group=document.createElement('optgroup');group.label=label;for(const [value,name] of keys){const option=document.createElement('option');option.value=value;option.textContent=name;group.append(option)}select.append(group)}
+   if(![...select.options].some(o=>Number(o.value)===a.key)){const option=document.createElement('option');option.value=a.key;option.textContent='HID key '+a.key;select.append(option)}
+   select.value=a.key;select.onchange=()=>{a.key=Number(select.value);changed()};
+   fields.append(field('Key',select,'key-field'),field('Hold / ms',number(a.hold,20,10000,v=>a.hold=v)),field('After release / ms',number(a.wait,0,86400000,v=>a.wait=v)));
+   card.append(fields);const mods=document.createElement('div');mods.className='mods';
+   for(const [bit,name] of [[1,'Ctrl'],[2,'Shift'],[4,'Alt / ⌥'],[8,'Cmd / Win']]){const label=document.createElement('label');label.className='mod';const input=document.createElement('input');input.type='checkbox';input.checked=!!(a.mods&bit);input.onchange=()=>{a.mods=input.checked?a.mods|bit:a.mods&~bit;changed()};label.append(input,document.createTextNode(name));mods.append(label)}card.append(mods)
+  }else{fields.append(field('Wait / ms',number(a.wait,1,86400000,v=>a.wait=v)));card.append(fields)}
+  $('actions').append(card);
+ });updateButtons()
+}
+function validate(){
+ if(!Number.isInteger(config.loops)||config.loops<0||config.loops>100000||($('loopMode').value==='count'&&config.loops<1))throw Error('Enter a repeat count from 1 to 100000');
+ for(const [i,a] of config.actions.entries()){
+  if(!Number.isInteger(a.wait)||a.wait<(a.type==='wait'?1:0)||a.wait>86400000)throw Error('Action '+(i+1)+': wait time is out of range');
+  if(a.type==='key'&&(!Number.isInteger(a.hold)||a.hold<20||a.hold>10000))throw Error('Action '+(i+1)+': hold time must be 20-10000 ms');
+ }
+}
+$('enabled').onchange=()=>{config.enabled=$('enabled').checked;changed()};
+$('loopMode').onchange=()=>{config.loops=$('loopMode').value==='forever'?0:Math.max(1,Number($('loops').value)||1);$('loopCountField').hidden=config.loops===0;changed()};
+$('loops').oninput=()=>{config.loops=$('loops').value===''?NaN:Number($('loops').value);changed()};
+$('addKey').onclick=()=>{if(config.actions.length<32){config.actions.push({type:'key',key:30,mods:0,hold:40,wait:500});changed();render()}};
+$('addWait').onclick=()=>{if(config.actions.length<32){config.actions.push({type:'wait',wait:1000});changed();render()}};
+$('reset').onclick=()=>{if(confirm('Replace the draft with the default 1 → 2 → 3 repeating sequence? Save to apply.')){config={enabled:config.enabled,loops:0,actions:[30,31,32].map(key=>({type:'key',key,mods:0,hold:40,wait:500}))};changed();render()}};
+$('save').onclick=async()=>{try{validate();busy=true;updateButtons();await api('/api/config?id='+selected,config);dirty=false;dirtyFlags[selected]=false;drafts[selected]=config;toast('Sequence saved and paused. Other sequences are unchanged.')}catch(e){toast(e.name==='AbortError'?'Request timed out. Check your hotspot connection.':e.message,true)}finally{busy=false;updateButtons();await poll()}};
+$('start').onclick=async()=>{try{await api('/api/start?id='+selected,{});toast('Saved sequence started');await poll()}catch(e){toast(e.message,true)}};
+$('stop').onclick=async()=>{try{await api('/api/stop?id='+selected,{});toast('Sequence stopped');await poll()}catch(e){toast('Stop request failed. Press BOOT on the board to stop.',true)}};
+$('startAll').onclick=async()=>{try{await api('/api/start-all',{});toast('All enabled sequences started');await poll()}catch(e){toast(e.message,true)}};
+$('stopAll').onclick=async()=>{try{await api('/api/stop-all',{});toast('All sequences stopped');await poll()}catch(e){toast('Stop request failed. Press BOOT to stop.',true)}};
+let polling=false;
+async function poll(){if(polling)return;polling=true;try{
+ const s=await api('/api/status');lastStatus=s;online=true;
+ $('linkState').className='badge good';$('linkState').lastElementChild.textContent='Device online';
+ $('usbState').textContent=s.usb?'USB connected':'USB disconnected / asleep';$('usbState').className=s.usb?'badge good':'badge';
+ showStatus();
+ if(!loaded){drafts=await Promise.all([0,1,2,3].map(i=>api('/api/config?id='+i)));config=drafts[selected];loaded=true;dirty=false;render()}
+
+ }catch(e){online=false;$('linkState').className='badge';$('linkState').lastElementChild.textContent='Device disconnected';$('runState').textContent='Unable to read status';$('progress').textContent='Check that your phone is connected to key-agent. Press BOOT on the board to stop.'}finally{polling=false;updateButtons()}}
+window.addEventListener('beforeunload',e=>{if(dirtyFlags.some(Boolean)){e.preventDefault();e.returnValue=''}});
+poll();setInterval(poll,1500);
+</script></body></html>
