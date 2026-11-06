@@ -75,7 +75,7 @@ Release packages include SHA-256 checksums. The separate images leave the NVS pa
 After the initial ESP-IDF configure/build downloads managed components:
 
 ```sh
-./tests/run.sh
+sh tests/run.sh
 python3 tests/preview_server.py
 ```
 
